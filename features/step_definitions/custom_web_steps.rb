@@ -60,17 +60,6 @@ And /^I submit the form$/ do
   find("input[type='submit']").click
 end
 
-Then /^the "([^"]*)" field should have a validation error$/ do |field|
-  find_field(field).has_xpath?(".//ancestor::div[contains(@class, 'control-group')]/div[contains(@class, 'field_with_errors')]")
-end
-
-
-Then /^following field[s]? should have validation error[s]?:$/ do |fields|
-  fields.raw.each do |field|
-    step %{the "#{field[0]}" field should have a validation error}
-  end
-end
-
 And /^I expand the publisher$/ do
  click_publisher
 end
@@ -271,10 +260,15 @@ When /^I focus the "([^"]+)" field$/ do |field|
   find_field(field).click
 end
 
-Given /^I have configured a Bitcoin wallet$/ do
-  AppConfig.settings.bitcoin_wallet_id = "AAAAAA"
+Given /^I have configured a Bitcoin address$/ do
+  AppConfig.settings.bitcoin_address = "AAAAAA"
 end
 
-Then /^I should see the Bitcoin wallet ID$/ do
+Then /^I should see the Bitcoin address$/ do
   find("#bitcoin_address")['value'].should == "AAAAAA"
+end
+
+Given /^"([^"]*)" is hidden$/ do |selector|
+  page.should have_selector(selector, visible: false)
+  page.should_not have_selector(selector)
 end
