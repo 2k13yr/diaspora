@@ -99,6 +99,10 @@ gem 'haml',                    '4.0.3'
 gem 'mobile-fu',               '1.2.1'
 gem 'will_paginate',           '3.0.4'
 
+# Workarounds
+# http://stackoverflow.com/a/18630251/2199687
+gem 'rubyzip', '< 1.0.0'
+
 
 ### GROUPS ####
 
